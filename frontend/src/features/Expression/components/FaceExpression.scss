@@ -1,0 +1,203 @@
+.face-expression {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    animation: cardFadeIn 0.6s ease-out;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 500px;
+
+    &:hover {
+        border-color: rgba(221, 66, 0, 0.3);
+        box-shadow: 0 12px 40px rgba(221, 66, 0, 0.1);
+    }
+}
+
+.face-expression__video {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(221, 66, 0, 0.2);
+    transition: all 0.3s ease;
+    animation: videoZoomIn 0.6s ease-out;
+
+    &:hover {
+        border-color: rgba(221, 66, 0, 0.5);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.face-expression__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.face-expression__label {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+.face-expression__status {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #dd4200 0%, #ff6b35 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textPulse 1s ease-in-out infinite;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.detecting {
+        animation: textPulse 1s ease-in-out infinite;
+    }
+
+    &.detected {
+        animation: fadeIn 0.6s ease-out;
+    }
+}
+
+.face-expression__button {
+    background: linear-gradient(135deg, #dd4200 0%, #ff6b35 100%);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 14px 40px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(221, 66, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    &:hover {
+        box-shadow: 0 8px 24px rgba(221, 66, 0, 0.5);
+        transform: translateY(-2px);
+
+        &::before {
+            left: 100%;
+        }
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(221, 66, 0, 0.3);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+/* Animations */
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes videoZoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes textPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .face-expression {
+        padding: 24px;
+        gap: 20px;
+    }
+
+    .face-expression__video {
+        max-width: 90%;
+        width: 100%;
+    }
+
+    .face-expression__button {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .face-expression {
+        padding: 16px;
+        gap: 16px;
+        border-radius: 16px;
+    }
+
+    .face-expression__video {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .face-expression__status {
+        font-size: 1.3rem;
+    }
+
+    .face-expression__button {
+        padding: 10px 24px;
+        font-size: 0.95rem;
+    }
+}
