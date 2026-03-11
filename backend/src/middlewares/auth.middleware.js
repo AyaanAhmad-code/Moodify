@@ -1,33 +1,31 @@
-const jwt = require("jsonwebtoken")
-const redis = require("../config/cache")
+import jwt from "jsonwebtoken";
+import redis from "../config/cache.js"; // The crucial .js extension!
 
-async function authUser(req,res,next){
-    const token = req.cookies.token
+export async function authUser(req, res, next) {
+    const token = req.cookies.token;
 
-    if(!token){
+    if (!token) {
         return res.status(401).json({
-            message:"Invalid Token"
-        })
+            message: "Invalid Token"
+        });
     }
 
-    const isblacklisted = await redis.get(token)
+    const isblacklisted = await redis.get(token);
 
-    if(isblacklisted){
+    if (isblacklisted) {
         return res.status(401).json({
-            message:"Invalid Token"
-        })
+            message: "Invalid Token"
+        });
     }
 
     try {
-        let decoded = jwt.verify(token,process.env.JWT_SECRET)
-        req.user = decoded
+        let decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
     } catch (error) {
         return res.status(401).json({
-            message:"Invalid Token"
-        })
+            message: "Invalid Token"
+        });
     }
 
     next();
 }
-
-module.exports = {authUser}

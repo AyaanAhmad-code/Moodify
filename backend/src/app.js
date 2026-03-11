@@ -1,18 +1,19 @@
-const express = require("express")
-const cookieParser = require("cookie-parser")
-const authRoutes = require("./routes/auth.routes")
-const songRoutes = require("./routes/song.routes")
-const cors = require("cors")
+import express from "express";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import authRoutes from "./routes/auth.routes.js";
+import songRoutes from "./routes/song.routes.js";
 
 const app = express();
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true
-}))
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 
-app.use("/api/auth",authRoutes)
-app.use("/api/songs",songRoutes)
+app.use("/api/auth", authRoutes);
+app.use("/api/songs", songRoutes);
 
-module.exports = app
+export default app;

@@ -1,10 +1,10 @@
-const {Router} = require("express");
-const songController = require("../controllers/song.controller")
-const upload = require("../middlewares/upload.middleware")
+import { Router } from "express";
+import songController from "../controllers/song.controller.js";
+import upload from "../middlewares/upload.middleware.js";
 
 const router = Router();
 
-router.post("/",upload.single("song"),songController.uploadSong)
-router.get("/",songController.getSong)
+router.post("/", upload.single("song"), songController.uploadSong);
+router.get("/", songController.getSong);
 
-module.exports = router;
+export default router;

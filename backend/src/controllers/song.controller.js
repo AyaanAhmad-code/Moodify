@@ -1,6 +1,9 @@
-const songModel = require("../models/song.model");
-const id3 = require("node-id3");
-const storageService = require("../services/storage.service");
+import songModel from "../models/song.model.js"; // Add the .js extension!
+import id3 from "node-id3";
+
+// Because we made uploadFile a "Named Export" in the storage service earlier, 
+// using "import * as" grabs everything from that file and bundles it into a single storageService object.
+import * as storageService from "../services/storage.service.js"; 
 
 async function uploadSong(req, res) {
   const songBuffer = req.file.buffer;
@@ -8,6 +11,7 @@ async function uploadSong(req, res) {
 
   const tags = id3.read(songBuffer);
 
+  // Both the song and the poster upload concurrently, cutting the wait time in half!
   const [songFile, posterFile] = await Promise.all([
     storageService.uploadFile({
       buffer: songBuffer,
@@ -34,8 +38,7 @@ async function uploadSong(req, res) {
   });
 }
 
-async function getSong(req,res){
-
+async function getSong(req, res) {
     const { mood } = req.query;
 
     try {
@@ -48,7 +51,7 @@ async function getSong(req,res){
     } catch (error) {
         res.status(500).json({ message: "Error fetching songs", error });
     }
-
 }
 
-module.exports = { uploadSong,getSong };
+// Exporting as a single default object so your song.routes.js works perfectly
+export default { uploadSong, getSong };
