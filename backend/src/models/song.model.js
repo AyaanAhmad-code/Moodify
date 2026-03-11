@@ -1,26 +1,27 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const songSchama = new mongoose.Schema({
-    url:{
-        type:String,
-        required:true
+const songSchema = new mongoose.Schema({
+    url: {
+        type: String,
+        required: true
     },
-    posterUrl:{
-        type:String,
-        required:true
+    posterUrl: {
+        type: String,
+        required: true
     },
-    title:{
-        type:String,
-        required:true
+    title: {
+        type: String,
+        required: true
     },
-    mood:{
-        type:String,
-        enum:{
-            values:["neutral","sad","happy","surprised"]
+    mood: {
+        type: String,
+        enum: {
+            values: ["neutral", "sad", "happy", "surprised"],
+            message: "{VALUE} is not a supported mood" // Optional: adds a nice custom error message
         }
     }
-})
+});
 
-const SongModel = mongoose.model('Song',songSchama);
+const SongModel = mongoose.model("Song", songSchema);
 
-module.exports = SongModel;
+export default SongModel;
