@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect} from 'react'
 import { useSong } from '../hooks/useSong'
-import './player.scss'
+import './Player.scss'
 
 const SPEED_OPTIONS = [0.5, 0.75, 1, 1.25, 1.5, 2]
 
