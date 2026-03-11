@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: "https://moodify-bice-psi.vercel.app/",
+    origin: "https://moodify-bice-psi.vercel.app",
     credentials: true
 }));
 
