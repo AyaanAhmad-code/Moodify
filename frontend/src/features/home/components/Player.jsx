@@ -101,9 +101,12 @@ const Player = () => {
 
     // Auto-advance to the next song when current track ends
     const handleSongEnd = () => {
-        setIsPlaying(false)
-        setCurrentTime(0)
-        if (nextTrack) nextTrack() 
+        setCurrentTime(0);
+        if (nextTrack) {
+            nextTrack(); 
+        } else {
+            setIsPlaying(false);
+        }
     }
 
     const progress = duration ? (currentTime / duration) * 100 : 0
