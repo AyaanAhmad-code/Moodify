@@ -18,6 +18,7 @@
     background-color: var(--bg-dark);
     position: relative;
     overflow: hidden;
+    padding: 1rem;
     font-family: 'Inter', sans-serif;
 
     /* Subtle ambient glow behind the form */
@@ -172,3 +173,26 @@
         30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
         40%, 60% { transform: translate3d(3px, 0, 0); }
     }
+
+    /* --- Mobile Layout Fixes --- */
+@media (max-width: 480px) {
+    .auth-page {
+        .form-container {
+            /* Shrink the massive 3rem padding so inputs have room to breathe */
+            padding: 2rem 1.5rem; 
+            gap: 1.5rem;
+
+            h1 {
+                font-size: 1.5rem; /* Scale down the title slightly */
+            }
+        }
+
+        form {
+            gap: 1.25rem;
+
+            .form-group input {
+                padding: 0.75rem 1rem; /* Slightly tighter inputs for touch screens */
+            }
+        }
+    }
+}
