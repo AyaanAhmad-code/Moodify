@@ -348,7 +348,6 @@ const Home = () => {
                     />
                     <div className="track-item__info">
                       <h4>{track.title}</h4>
-                      <p>{track.artist || "Unknown Artist"}</p>
                     </div>
                     {(song?._id === track._id || song?.url === track.url) && (
                       <div className="playing-bars">
