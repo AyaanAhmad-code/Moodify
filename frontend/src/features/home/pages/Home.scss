@@ -28,60 +28,111 @@
     radial-gradient(circle at 85% 30%, rgba(255, 107, 0, 0.03), transparent 25%);
 }
 
-/* --- NEW: Dashboard Navbar --- */
+/* --- PREMIUM FLOATING NAVBAR --- */
 .dashboard-nav {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   max-width: 1600px;
-  margin: 0 auto 24px auto; /* Centers it and adds space below */
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-color);
+  margin: 0 auto 24px auto;
+  
+  /* The Glassmorphism Magic */
+  padding: 12px 24px;
+  background: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px; /* Floating pill effect */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 
   &__logo {
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--accent-orange);
+    color: var(--text-primary);
     text-decoration: none;
     letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
     transition: opacity 0.2s ease;
+    text-shadow: 0 0 20px rgba(255, 107, 0, 0.1);
 
-    &:hover {
-      opacity: 0.8;
-    }
+    &:hover { opacity: 0.8; }
 
     .dot {
-      color: var(--text-primary);
+      color: var(--accent-orange);
+      /* Adds a subtle pulsing heartbeat to the logo dot */
+      animation: pulse 2s infinite ease-in-out; 
     }
   }
 
   &__user {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
 
-    .username {
-      color: var(--text-primary);
-      font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
+    /* New User Badge Container */
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 16px 6px 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.3s ease;
+
+      &:hover { background: rgba(255, 255, 255, 0.08); }
+
+      .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-orange), #ff3b00);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #fff;
+        box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+      }
+
+      .username {
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+      }
     }
 
+    /* Upgraded Logout Button */
     .logout-btn {
       background: transparent;
-      border: 1px solid var(--border-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--text-secondary);
-      padding: 6px 16px;
-      border-radius: 8px;
+      padding: 10px 20px;
+      border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+
+      svg { transition: transform 0.3s ease; }
 
       &:hover {
         border-color: var(--accent-orange);
-        color: var(--accent-orange);
-        background: rgba(255, 107, 0, 0.05);
+        color: #000;
+        background: var(--accent-orange);
+        box-shadow: 0 0 20px var(--accent-orange-glow);
+        transform: translateY(-1px);
+
+        /* Pushes the little arrow out when you hover */
+        svg { transform: translateX(3px); } 
       }
     }
   }
@@ -95,9 +146,9 @@
   max-width: 1600px;
   margin: 0 auto;
 
-  height: calc(100vh - 100px);
+  height: calc(100vh - 135px);
   /* ADD THIS: Prevents the UI from crushing on smaller screens */
-  min-height: 800px;
+  
 }
 
 /* --- Reusable Glass Card --- */
@@ -123,6 +174,8 @@
 .col-left {
   display: flex;
   flex-direction: column;
+  min-height: 0; /* Prevents stretching */
+  gap: 24px;
 
   .capture-card {
     flex: 1;
@@ -142,8 +195,10 @@
     }
 
     .capture-window {
-      flex: 1;
+      margin: auto 0;
+      padding: 16px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       border: 1px solid var(--border-color);
@@ -181,7 +236,20 @@
 .col-center {
   display: flex;
   flex-direction: column;
+  min-height: 0;
+  height: 100%;
   gap: 24px;
+  overflow-y: auto; 
+  padding-right: 8px;
+  padding-bottom: 24px;
+
+  > .glass-card {
+    flex-shrink: 0;
+  }
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
 
   .label {
     font-size: 0.75rem;
@@ -192,42 +260,97 @@
     margin-bottom: 8px;
   }
 
-  /* Current Mood Card */
-  .mood-analysis-card {
-    flex-direction: row;
-    align-items: center;
+  /* --- Aura Analysis Card --- */
+  .aura-analysis-card {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    padding: 1.5rem;
 
-    .mood-text {
-      font-size: 4rem;
-      font-weight: 800;
-      text-transform: capitalize;
-      margin: 0 0 16px 0;
-      line-height: 1;
-      text-shadow: 0 0 20px var(--accent-orange-glow);
-    }
+    .aura-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
 
-    .match-bar-container {
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-      margin-bottom: 8px;
+      .label {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        letter-spacing: 2px;
+      }
 
-      .match-bar-fill {
-        height: 100%;
-        border-radius: 4px;
+      .aura-status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+
+        .pulse-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          animation: pulse 2s infinite ease-in-out;
+        }
       }
     }
 
-    .match-percentage {
-      font-size: 0.9rem;
-      font-weight: 600;
+    .aura-visual-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0;
+
+      .aura-orb {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: floatOrb 4s infinite ease-in-out;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+
+        .aura-icon {
+          font-size: 2.5rem;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+      }
     }
 
-    .analysis-emoji {
-      font-size: 7rem;
-      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+    .energy-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      .metric {
+        .metric-labels {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.8rem;
+          margin-bottom: 6px;
+          color: var(--text-secondary);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+
+        .mini-bar {
+          width: 100%;
+          height: 4px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+          overflow: hidden;
+
+          div {
+            height: 100%;
+            border-radius: 4px;
+            transition:
+              width 0.5s ease,
+              background-color 0.5s ease;
+          }
+        }
+      }
     }
   }
 
@@ -284,17 +407,17 @@
       flex-shrink: 0;
 
       .pulsing-orb {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                opacity: 0.15; /* Dimmed state when no song is playing */
-                transform: scale(0.85);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        opacity: 0.15; /* Dimmed state when no song is playing */
+        transform: scale(0.85);
 
-                /* Only starts the heavy pulsing animation when a song is active! */
-                &.active {
-                    animation: pulseOrb 3.4s ease-in-out infinite alternate !important;
-                }
+        /* Only starts the heavy pulsing animation when a song is active! */
+        &.active {
+          animation: pulseOrb 3.4s ease-in-out infinite alternate !important;
+        }
       }
 
       .wave-bars {
@@ -308,8 +431,7 @@
           width: 4px;
           height: 8px;
           border-radius: 4px;
-          transition:
-            background-color 0.5s ease;
+          transition: background-color 0.5s ease;
 
           /* Animation triggers only when 'playing' class is active */
           &.playing {
@@ -392,10 +514,12 @@
 .col-right {
   display: flex;
   flex-direction: column;
+  min-height: 0;
 
   .playlist-card {
     flex: 1;
     padding-right: 8px;
+    min-height: 0;
 
     h3 {
       font-size: 1.1rem;
@@ -582,6 +706,31 @@
   }
 }
 
+@keyframes floatOrb {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+}
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 1200px) {
   .dashboard-grid {
@@ -597,5 +746,44 @@
 
   .col-left .capture-card {
     min-height: 400px;
+  }
+}
+@media (max-width: 968px) {
+  .dashboard-grid {
+    display: flex; /* Flex handles mobile stacking much better than Grid */
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* 1. Fix the Center Column collapsing */
+  .col-center {
+    height: auto !important; /* Overrides the 100% height from desktop */
+    overflow-y: visible; /* Turns off the inner scrollbar */
+    padding-bottom: 0;
+  }
+
+  /* 2. Fix the Camera window sizing */
+  .col-left .capture-card {
+    min-height: 450px;
+  }
+
+  /* 3. Fix the Playlist disappearing or stretching infinitely */
+  .col-right {
+    height: auto;
+    
+    .playlist-card {
+      /* Gives the playlist a fixed height on mobile so it can still scroll inside */
+      height: 500px; 
+      min-height: 500px;
+    }
+  }
+
+  /* Optional: Adjust the navbar for smaller screens */
+  .dashboard-nav {
+    padding: 12px 16px;
+    
+    &__user .username {
+      display: none; /* Hides the username text to save space, keeps the cool avatar */
+    }
   }
 }

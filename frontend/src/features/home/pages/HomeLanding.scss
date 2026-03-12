@@ -174,7 +174,6 @@
 .hero {
     position: relative;
     min-height: 100vh;
-    /* FIX 1: Use column flow so padding isn't ignored when content overflows */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -210,12 +209,10 @@
         width: 100%;
         max-width: 1280px;
         margin: 0 auto;
-        /* FIX 2: Massive padding acting as bumpers. 
-           140px top clears the navbar. 100px bottom pushes the next section away. */
         padding: 0 2rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 3rem; // Slightly reduced to fit better on standard laptops
+        gap: 3rem;
         align-items: center;
         position: relative;
         z-index: 2;
@@ -256,7 +253,7 @@
     }
 
     &__title {
-        font-size: clamp(3rem, 5vw, 5.5rem); // Scales perfectly on all screens
+        font-size: clamp(3rem, 5vw, 5.5rem);
         font-weight: 800;
         line-height: 1.05;
         letter-spacing: -0.03em;
@@ -503,6 +500,12 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
+
+        > :nth-child(4):last-child {
+            @media (min-width: 992px) {
+                grid-column: 2; // Pushes the card into the center column!
+            }
+        }
     }
 }
 

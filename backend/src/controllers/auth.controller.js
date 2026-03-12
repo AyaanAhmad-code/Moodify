@@ -3,6 +3,13 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import redis from "../config/cache.js"; // Don't forget the .js extension!
 
+const cookieOptions = {
+    httpOnly: true,       // Prevents XSS attacks
+    secure: true,         // REQUIRED for cross-domain (forces HTTPS)
+    sameSite: "none",     // REQUIRED to allow Vercel to save Render's cookie
+    maxAge: 24 * 60 * 60 * 1000 // 1 day expiration
+};
+
 async function registerUser(req, res) {
     const { username, email, password } = req.body;
 
@@ -32,7 +39,7 @@ async function registerUser(req, res) {
         username: user.username
     }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-    res.cookie("token", token);
+    res.cookie("token", token,cookieOptions);
 
     return res.status(201).json({
         message: "User registered successfully",
@@ -73,7 +80,7 @@ async function loginUser(req, res) {
         username: user.username
     }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-    res.cookie("token", token);
+    res.cookie("token", token, cookieOptions);
 
     return res.status(200).json({
         message: "User logged in successfully",
@@ -97,7 +104,7 @@ async function getMeUser(req, res) {
 async function logoutUser(req, res) {
     const token = req.cookies.token;
 
-    res.clearCookie("token");
+    res.clearCookie("token", cookieOptions);
 
     // Add the token to the Redis blacklist to expire in 24 hours (86400 seconds)
     await redis.set(token, Date.now().toString(), "EX", 60 * 60 * 24);
