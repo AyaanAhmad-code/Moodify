@@ -10,7 +10,7 @@ const Login = () => {
     const [error, setError] = useState(""); // State to hold the error message
     const [showPassword, setShowPassword] = useState(false); 
     
-    const { loading, handleLogin } = useAuth();
+    const { handleLogin } = useAuth();
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
@@ -117,9 +117,8 @@ const Login = () => {
                     <button 
                         className="button" 
                         type="submit"
-                        disabled={loading} // Re-added the loading check so users can't spam the button
                     >
-                        {loading ? "Authenticating..." : "Login"}
+                        Login
                     </button>
                 </form>
                 

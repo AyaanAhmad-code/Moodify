@@ -11,7 +11,7 @@ const Register = () => {
     const [error, setError] = useState(""); // State to hold the error message
     const [showPassword, setShowPassword] = useState(false); 
 
-    const { loading, handleRegister } = useAuth();
+    const { handleRegister } = useAuth();
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
@@ -126,9 +126,8 @@ const Register = () => {
                     <button 
                         className="button" 
                         type="submit"
-                        disabled={loading} // Prevent multiple submissions
                     >
-                        {loading ? "Creating Account..." : "Register"}
+                        Register
                     </button>
                 </form>
                 

@@ -498,7 +498,8 @@
   /* Player wrapper */
   .player-wrapper-card {
     padding: 0;
-    overflow: hidden;
+    overflow: visible !important;
+    z-index: 10;
     border-color: var(--accent-orange);
     box-shadow: 0 0 20px var(--accent-orange-glow);
 
