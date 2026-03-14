@@ -2,7 +2,7 @@
 
 **Moodify** is a cutting-edge MERN stack application that transforms your emotional state into a personalized musical journey. By leveraging real-time facial expression analysis, Moodify curates the perfect soundtrack to match your vibe.
 
-![Moodify Hero](https://github.com/your-username/Moodify/blob/main/frontend/public/banner-image.png) 
+![Moodify Hero](https://github.com/AyaanAhmad-code/Moodify/blob/main/frontend/public/hero.png) 
 
 ## 🚀 Features
 
@@ -34,7 +34,7 @@
 
 | Login Page | Dashboard | Mood Detection |
 |---|---|---|
-| ![Login](https://github.com/your-username/Moodify/blob/main/screenshots/login.png) | ![Dashboard](https://github.com/your-username/Moodify/blob/main/screenshots/dashboard.png) | ![Detection](https://github.com/your-username/Moodify/blob/main/screenshots/detect.png) |
+| ![Login](https://github.com/AyaanAhmad-code/Moodify/blob/main/screenshots/login.png) | ![Dashboard](https://github.com/AyaanAhmad-code/Moodify/blob/main/public/dashboard.png) | ![Detection](https://github.com/AyaanAhmad-code/Moodify/blob/main/public/song.png) |
 
 ## 🚦 Getting Started
 
