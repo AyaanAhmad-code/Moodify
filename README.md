@@ -43,6 +43,8 @@
 * MongoDB Atlas Account
 * Tavily API Key
 
+---
+
 ### Installation
 
 1. **Clone the repository**
@@ -66,9 +68,13 @@
      TVLY_API_KEY=your_tavily_key
      Run the App
 
-Bash
-# Run both frontend and backend
-npm run dev
+
+## Run both frontend and backend
+    ```bash
+    npm run dev
+
+---
+
 🛡️ Future Roadmap
 [ ] Integration with Spotify API for unlimited library access.
 
@@ -76,9 +82,13 @@ npm run dev
 
 [ ] Mobile-responsive PWA (Progressive Web App).
 
+---
+
 👨‍💻 Author
 Ayaan Ahmad MERN Stack Developer | Sheriyans Coding School Student
 
-LinkedIn | Portfolio
+https://www.linkedin.com/in/ayaanah287/ | https://my-portfolio-ayaan.vercel.app/
+
+---
 
 ⭐️ If you like this project, give it a star!
