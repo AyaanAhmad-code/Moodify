@@ -34,7 +34,7 @@
 
 | Login Page | Dashboard | Mood Detection |
 |---|---|---|
-| ![Login](https://github.com/AyaanAhmad-code/Moodify/blob/main/screenshots/login.png) | ![Dashboard](https://github.com/AyaanAhmad-code/Moodify/blob/main/public/dashboard.png) | ![Detection](https://github.com/AyaanAhmad-code/Moodify/blob/main/public/song.png) |
+| ![Login](https://github.com/AyaanAhmad-code/Moodify/blob/main/frontend/public/login.png) | ![Dashboard](https://github.com/AyaanAhmad-code/Moodify/blob/main/frontend/public/dashboard.png) | ![Detection](https://github.com/AyaanAhmad-code/Moodify/blob/main/frontend/public/song.png) |
 
 ## 🚦 Getting Started
 
