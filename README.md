@@ -51,31 +51,43 @@
    ```bash
    git clone [https://github.com/AyaanAhmad-code/Moodify.git](https://github.com/AyaanAhmad-code/Moodify.git)
    cd Moodify
-2. **Install Dependencies**
+### 2. Install Dependencies
 
-   ```Bash
-   # Install backend deps
-   npm install
-   # Install frontend deps
-   cd frontend && npm install
-3. **Environment Setup**
-     Create a .env file in the root directory:
+<div>
+  <div style="background: #161b22; padding: 10px; border: 1px solid #30363d; border-bottom: none; border-radius: 6px 6px 0 0; font-family: monospace; font-size: 12px; color: #8b949e;">
+    Bash
+  </div>
+  <pre style="margin-top: 0; border-radius: 0 0 6px 6px; border: 1px solid #30363d;">
+<code class="language-bash">
+# Install backend deps
+npm install
+# Install frontend deps
+cd frontend && npm install
+</code></pre>
+</div>
 
-     ```Code snippet
-     PORT=5000
-     MONGO_URI=your_mongodb_uri
-     JWT_SECRET=your_secret_key
-     TVLY_API_KEY=your_tavily_key
-     Run the App
+### 3. Environment Setup
+<div>
+  <div style="background: #161b22; padding: 10px; border: 1px solid #30363d; border-bottom: none; border-radius: 6px 6px 0 0; font-family: monospace; font-size: 12px; color: #8b949e;">
+    Code snippet
+  </div>
+  <pre style="margin-top: 0; border-radius: 0 0 6px 6px; border: 1px solid #30363d;">
+<code class="language-env">
+PORT=5000
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_secret_key
+TVLY_API_KEY=your_tavily_key
+</code></pre>
+</div>
 
 
 ## Run both frontend and backend
-    ```bash
     npm run dev
 
 ---
 
 🛡️ Future Roadmap
+
 [ ] Integration with Spotify API for unlimited library access.
 
 [ ] Social sharing of "Daily Mood Playlists".
