@@ -9,6 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(""); // State to hold the error message
     const [showPassword, setShowPassword] = useState(false); 
+    const [isSubmitting, setIsSubmitting] = useState(false);
     
     const { handleLogin } = useAuth();
     const navigate = useNavigate();
@@ -22,21 +23,23 @@ const Login = () => {
             return setError("Please fill in all fields.");
         }
 
+        setIsSubmitting(true);
+
         try {
             await handleLogin({ email, password });
             navigate("/app");
         } catch (err) {
             console.error("Login failed:", err);
-            
-            // Extract the error message. 
-            // This safely checks if your Axios/Fetch backend returned a specific message.
-            // If not, it falls back to a generic message.
+
             const errorMessage = 
                 err.response?.data?.message || 
                 err.message || 
                 "Invalid email or password. Please try again.";
                 
             setError(errorMessage);
+        }finally {
+            // Error aaye ya success, button ko wapas normal karein
+            setIsSubmitting(false); 
         }
     }
 
@@ -115,11 +118,17 @@ const Login = () => {
                     </div>
 
                     <button 
-                        className="button" 
-                        type="submit"
-                    >
-                        Login
-                    </button>
+                className="button" 
+                type="submit" 
+                disabled={isSubmitting} // User ab baar-baar click nahi kar payega
+            >
+                {isSubmitting ? (
+                    <div className="flex-center">
+                        <span className="spinner-small"></span> 
+                        Logging in...
+                    </div>
+                ) : "Login"}
+            </button>
                 </form>
                 
                 <p>Don't have an account? <Link to="/register">Register here</Link></p>

@@ -10,6 +10,7 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(""); // State to hold the error message
     const [showPassword, setShowPassword] = useState(false); 
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const { handleRegister } = useAuth();
     const navigate = useNavigate();
@@ -22,6 +23,8 @@ const Register = () => {
         if (!username || !email || !password) {
             return setError("Please fill in all fields.");
         }
+
+        setIsSubmitting(true);
 
         try {
             await handleRegister({ email, username, password });
@@ -37,6 +40,9 @@ const Register = () => {
                 "Registration failed. Please try again.";
                 
             setError(errorMessage);
+        } finally {
+            // Error ho ya success, button ko wapas clickable banayein
+            setIsSubmitting(false); 
         }
     }
 
@@ -124,11 +130,19 @@ const Register = () => {
                     </div>
                     
                     <button 
-                        className="button" 
-                        type="submit"
-                    >
-                        Register
-                    </button>
+                className="button" 
+                type="submit"
+                disabled={isSubmitting} // Multi-click block karein
+            >
+                {isSubmitting ? (
+                    <div className="flex-center">
+                        <span className="spinner-small"></span> 
+                        Creating Account...
+                    </div>
+                ) : (
+                    "Register"
+                )}
+            </button>
                 </form>
                 
                 <p>Already have an account? <Link to="/login">Login here</Link></p>
