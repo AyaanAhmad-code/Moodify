@@ -2,15 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { init, detect } from "../utils/utils";
 import './FaceExpression.scss';
 
-const emojiMap = {
-    "happy": "😊",
-    "sad": "😢",
-    "surprised": "😲",
-    "neutral": "😐",
-    "angry": "😠",
-    "Detecting...": "📡"
-};
-
 const moodColors = {
     happy: "#ff6b00",
     sad: "#00e5ff",
@@ -55,23 +46,14 @@ export default function FaceExpression({ onClick = () => {} }) {
                 "--mood-glow": `${activeColor}44` 
             }}
         >
-            {/* Video is kept for AI detection but hidden from user to avoid layout breaks */}
-            <video
-                ref={videoRef}
-                className="face-expression__video-hidden"
-                playsInline
-                autoPlay
-                muted
-            />
-
             <div className="scanner-container">
-                <div className="scan-line"></div>
-                
-                <div className="emoji-wrap">
-                    <span className="main-emoji">
-                        {emojiMap[expression.toLowerCase()] || emojiMap.neutral}
-                    </span>
-                </div>
+                <video
+                    ref={videoRef}
+                    className="face-expression__video"
+                    playsInline
+                    autoPlay
+                    muted
+                />
                 
                 {/* Visual UI Elements */}
                 <div className="corner top-left"></div>

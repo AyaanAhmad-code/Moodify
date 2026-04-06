@@ -13,14 +13,6 @@
     height: 100%; // Fill the sidebar height
     transition: all 0.4s ease;
 
-    &__video-hidden {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-        width: 1px;
-        height: 1px;
-    }
-
     .scanner-container {
         position: relative;
         width: 100%;
@@ -35,20 +27,11 @@
         overflow: hidden;
         box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
 
-        .emoji-wrap .main-emoji {
-            font-size: 80px;
-            filter: drop-shadow(0 0 20px var(--mood-color));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .scan-line {
-            position: absolute;
+        .face-expression__video {
             width: 100%;
-            height: 2px;
-            background: var(--mood-color);
-            box-shadow: 0 0 15px var(--mood-color);
-            z-index: 10;
-            animation: moveScan 2.5s linear infinite;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
         }
 
         .corner {
@@ -101,16 +84,4 @@
             filter: brightness(1.1);
         }
     }
-}
-
-@keyframes moveScan {
-    0% { top: -5%; opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { top: 105%; opacity: 0; }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
 }
