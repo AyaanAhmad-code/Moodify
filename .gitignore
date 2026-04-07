@@ -1,0 +1,4 @@
+
+# Large executables
+frontend/public/*.exe
+*.exe
